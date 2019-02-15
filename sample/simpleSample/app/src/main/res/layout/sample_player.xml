@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/parent_view" >
+
+    <com.nexstreaming.nexplayerengine.NexVideoRenderer
+        android:id="@+id/videoview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+
+        />
+    <com.nexstreaming.nexplayerengine.NexCaptionPainter
+        android:id="@+id/NexCaptionPainter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/visibility_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <SeekBar
+            android:id="@+id/seek_layout"
+            style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:progressBackgroundTint="@color/design_default_color_primary_dark"
+            android:layout_weight="1" />
+        <RelativeLayout
+            android:id="@+id/capture_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#44888888"
+            android:layout_weight="1" >
+            <LinearLayout
+                android:id="@+id/button_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:gravity="center" >
+
+                <ImageButton
+                    android:id="@+id/play_pause_button"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip"
+                    android:background="@android:drawable/ic_media_play"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
