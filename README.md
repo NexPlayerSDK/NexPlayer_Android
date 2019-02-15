@@ -257,6 +257,18 @@ The NexCaptionPainter™ renders a variety of subtitle formats including:
 * CEA 708 closed captions
 * Web Video Text Tracks (WebVTT)
 
+NexCaptionPainter should know the type of caption to be displayed. when the player open operation is completed, you can recognize the type of captions. NexPlayer invoke onStatusReport event when there is a change in the available content information. below code show how to set the type of caption.
+```java
+@Override
+public void onStatusReport(NexPlayer mp, int msg, int param1) {
+    if (msg == NexPlayer.NEXPLAYER_STATUS_REPORT_CONTENT_INFO_UPDATED) {
+        mContentInfo = mNexPlayer.getContentInfo();
+        int contentDuration = mContentInfo.mMediaDuration;
+        mCaptionPainter.setCaptionType(mContentInfo.mCaptionType);
+    }
+}
+```
+
 NexCaptionPainter always needs to know the video output size in the application so that the subtitles can be correctly positioned. If a change into the video size is produced, that information should be notify to NexCaptionPainter.
 ```java
 mCaptionPainter.setRenderingArea(new Rect(left, top, left + width, top + height), scale);

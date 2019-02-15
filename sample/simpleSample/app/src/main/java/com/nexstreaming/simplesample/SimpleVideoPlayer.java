@@ -322,6 +322,7 @@ public class SimpleVideoPlayer extends AppCompatActivity {
                 if (msg == NexPlayer.NEXPLAYER_STATUS_REPORT_CONTENT_INFO_UPDATED) {
                     mContentInfo = mNexPlayer.getContentInfo();
                     int contentDuration = mContentInfo.mMediaDuration;
+                    mCaptionPainter.setCaptionType(mContentInfo.mCaptionType);
                 }
             }
 

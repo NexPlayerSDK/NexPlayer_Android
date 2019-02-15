@@ -20,3 +20,7 @@
 /build
 /captures
 .externalNativeBuild
+
+#visual studio code
+.classpath
+.settings/
