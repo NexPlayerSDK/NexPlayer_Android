@@ -29,11 +29,11 @@ android 문서에는 getTimestamp에 대한 정의를 아래와 같이 했습니
 **getTimestamp를 통해 현재 position을 구할 때 고려해야하는 3가지 경우가 있습니다.**
 
 1. getTimestamp의 return이 false 인 경우
-getTimestamp의 return이 false 인 경우, playbackHeadPosition을 현재 position으로 설정합니다. 
+playbackHeadPosition을 현재 position으로 설정합니다. 
 그러나 대개 playbackHeadPosition값은 증가되지 않습니다. NexPlayer는 이 함수를 통해서 Audio/Video Sync를 맞추므로 화면이 멈추어 있습니다.
 
 2. getTimestamp의 return이 true 이면서, audioTimestampPositionFrames 값이 처음 획득한 값인 경우
-getTimestamp의 return이 true 이면서, audioTimestampPositionFrames 값이 처음 획득한 값인 경우, audioTimestampPositionFrames을 현재 position으로 설정합니다. 그러나 약간의 시간동안은 audioTimestampPositionFrames값이 증가되지 않을 수 있습니다. 이 때에도 화면이 멈추어 있습니다.
+audioTimestampPositionFrames을 현재 position으로 설정합니다. 그러나 약간의 시간동안은 audioTimestampPositionFrames값이 증가되지 않을 수 있습니다. 이 때에도 화면이 멈추어 있습니다.
 최초로 획득한 audioTimestampPositionFrames을 initialTimestampPositionFrames 변수에 설정합니다.
 
 3. getTimestamp의 return이 true 이면서, audioTimestampPositionFrames 값이 처음 획득한 값과 다른 경우
@@ -235,8 +235,10 @@ nexSoundHandle->NexSoundSetParam(Processor::SpeedControl, ParamCommand::SpeedCon
 nexSoundHandle->NexSoundGetParam(Processor::SpeedControl, ParamCommand::SpeedControl_Input_SamplePerChannel, &numInputSamplesPerChannelRequired);
 ```
 
-numInputSamplesPerChannelRequired 값과 frame size(=numChannel * bitsPerSample >>3)을 곱하면 NexSound에 입력할 input bytes를 계산할 수 있습니다. 예를 들어,
+numInputSamplesPerChannelRequired 값과 frame size(=numChannel * bitsPerSample >>3)을 곱하면 NexSound에 입력할 input bytes를 계산할 수 있습니다. 
 
-> channel과 bitsPerSample, 그리고 배속이 각각 2, 16, 1배속인 경우, numInputSamplesPerChannelRequired의 값이 default인 1024 bytes 이며, frame size(=2 * 16 >>3)는 4이므로 NexSound에서 1배속에 필요한 input bytes는 4096이 됩니다. 그러나 2배속으로 변경한 경우, numInputSamplesPerChannelRequired의 값이 NexSound로부터 2048을 return 받아 input size가 8192가 됩니다. 
+예를 들어,
+
+ channel과 bitsPerSample, 그리고 배속이 각각 2, 16, 1배속인 경우, numInputSamplesPerChannelRequired의 값이 default인 1024 bytes 이며, frame size(=2 * 16 >>3)는 4이므로 NexSound에서 1배속에 필요한 input bytes는 4096이 됩니다. 그러나 2배속으로 변경한 경우, numInputSamplesPerChannelRequired의 값이 NexSound로부터 2048을 return 받아 input size가 8192가 됩니다. 
 결과적으로 2배속일 때는 AudioTrack에 decoding된 frame을 write하는 함수들인 consumeBuffer - drainToAudioTrack에서 1배속에 2배에 해당되는 data를 NexSound에 입력합니다. (output size는 1배속과 동일한 size를 가집니다.) 
 
