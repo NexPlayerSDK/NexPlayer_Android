@@ -1,5 +1,5 @@
 # Video Decoder in NexPlayer™ for Android
-이 항목에서는 NexPlayer에서 사용되는 Video Decoder에 대한 시술에 대해서 다룹니다.
+이 항목에서는 NexPlayer에서 사용되는 Video Decoder에 대한 사용법에 대해서 다룹니다.
 <hr />
 
 ## Android MediaCodec을 이용한 Video Decoding 방법.
