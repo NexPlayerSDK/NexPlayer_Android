@@ -34,14 +34,13 @@ for (int i = 0; i < extractor.getTrackCount(); i++) {
   
   Lodg.d("MediaCodec", "mime : " + mime);
   
-  if (mime.startsWith("video/"))
-  {
+  if (mime.startsWith("video/")) {
     extractor.selectTrack(i);
     break;
   }
 }
 ```
-3. MediaFormat을 얻은 후, 생성될 codec의 mime type을 구했으면 MediaCodec을 생성합니다. decoder를 생성할 때는 mime type으로 생성하는 방식이 있고 decoder name으로 생성하는 방법<b>(createDecoderByName)</b>이 있습니다. NexPlayer의 Codec Adaptation Layer의 구현은 Name으로 생성하게 되어 있으며 Name으로 구하기 위해서는 mime type과 <b>MediaCodecInfo</b> class를 이용하여 decoder name을 searching 하여 구할 수 있습니다. 자세한 사항은 아래 부분에 설명이 추가되어 있습니다.
+3. MediaFormat을 얻은 후, 생성될 codec의 mime type을 구했으면 MediaCodec을 생성합니다. decoder를 생성할 때는 mime type으로 생성하는 방식이 있고 decoder name으로 생성하는 방법<b>(createDecoderByName)</b>이 있습니다. NexPlayer의 Codec Adaptation Layer의 구현은 Name으로 생성하게 되어 있으며 Name으로 구하기 위해서는 mime type과 <b>MediaCodecInfo</b> class를 이용하여 decoder name을 searching 하여 구할 수 있습니다. 자세한 사항은 <b>Appendix section</b>에 추가되어 있습니다.
 ```java
 private MediaCodec decoder;
 try {
