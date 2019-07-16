@@ -24,7 +24,7 @@ try {
   e.printStackTrace();
 }
 ```
-2. MediaCodec 초기화를 위해서 MediaFormat을 구한다. MediaExtractor에서 track 정보를 얻어와 해당 track의 MediaFormat을 구합니다. 여기에선 video channel만 사용하도록 MediaExtractor에 track selection 해줍니다.
+2. MediaCodec 초기화를 위해서 재생할 컨텐츠의 MediaFormat 정보를 얻어야 합니다. MediaExtractor에서 track 정보를 얻어와 해당 track의 MediaFormat을 구합니다. 여기에선 video channel만 사용하도록 MediaExtractor에 track selection 해줍니다.
 ```java
 String mime = null;
 
