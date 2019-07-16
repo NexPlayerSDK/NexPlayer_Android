@@ -68,6 +68,8 @@ private class PlayerThread extends Thread {
         .
 @override
 public void run() {
+        .
+        .
   decoder.configure(format, surface, null, 0);
         .
         .
