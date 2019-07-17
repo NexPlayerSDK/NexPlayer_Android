@@ -80,8 +80,8 @@ public void run() {
 ```java
 decoder.start();
 ```
-6. MediaCodec에서 사용할 input/output buffer 생성 및 초기화.
-<b>Android L에선 초기화 과정의 getInput/OutputBuffers() API를 이용하여 buffer를 얻는 부분이 deprecated 됐고 getInput/OutputBuffer() API를 이용합니다.</b>
+6. MediaCodec에서 사용할 input/output buffer 생성 및 초기화.<br>
+Android L에선 초기화 과정의 getInput/OutputBuffers() API를 이용하여 buffer를 얻는 부분이 deprecated 됐고 getInput/OutputBuffer() API를 이용합니다.
 ```java
 ByteBuffer[] inputBuffers = null;
 ByteBuffer[] outputBuffers = null;
@@ -157,7 +157,7 @@ switch (outputIndex) {
 ```
 
 ### Android BufferQueue System
-Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data를 핸들링합니다. 이것의 역할은 아주 단순합니다. 그래픽 버퍼를 생성하는 컴포넌트<b>(생산자)</b>와 이 데이터를 받아서 디스플레이 하거나 프로세싱하는 컴포넌트<b>(소비자)</b>를 연결시켜 줍니다. 이러한 생산자/소비자 사이의 데이터를 이동시키는 작업을 BufferQueue를 통해서 처리합니다.<p>
+Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data를 핸들링합니다. 이것의 역할은 아주 단순합니다. 그래픽 버퍼를 생성하는 컴포넌트<b>(생산자)</b>와 이 데이터를 받아서 디스플레이 하거나 프로세싱하는 컴포넌트<b>(소비자)</b>를 연결시켜 줍니다. 이러한 생산자/소비자 사이의 데이터를 이동시키는 작업을 BufferQueue를 통해서 처리합니다.<br>
 위 코드를 보면 BufferQueue system에 의해서 dequeue/queue API를 이용하여 Frame 데이터 및 Rendering 데이터를 서로 유기적으로 사용하고 있는 것을 볼 수 있습니다.
   사용방법은 간단합니다.
   1. 생산자는 일련의 버퍼특징을 기술하여 비어있는 버퍼를 요청합니다 ==> dequeueInputBuffer
@@ -165,5 +165,5 @@ Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data�
   3. 프로세싱이 끝난 후, 소비자는 버퍼를 획득합니다. ==> acquireBuffer/dequeueOutputBuffer
   4. 소비자는 획득한 버퍼의 데이터를 사용합니다.
   5. 사용이 완료 됐으면 소비자는 반환합니다. ==> releaseOutputBuffer
-  좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<p>
-  http://source.android.com/devices/graphics/architecture.html
+  좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<br>
+  <a href=http://source.android.com/devices/graphics/architecture.html>Android Graphics Architecture</a>
