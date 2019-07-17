@@ -77,3 +77,19 @@ public void run() {
         .
 ```
 5. MediaCodec 시작.
+```java
+decoder.start();
+```
+6. MediaCodec에서 사용할 input/output buffer 생성 및 초기화.
+<b>Android L에선 초기화 과정의 getInput/OutputBuffers() API를 이용하여 buffer를 얻는 부분이 deprecated 됐고 getInput/OutputBuffer() API로 얻어 사용함.</b>
+```java
+ByteBuffer[] inputBuffers = null;
+ByteBuffer[] outputBuffers = null;
+
+if (Build.VERSION.SDK_INT < 21) {
+  inputBuffers = decoder.getInputBuffers();
+  outputBuffers = decoder.getOutputBuffers();
+}
+```
+#### BufferQueue
+Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data를 핸들링합니다. 이것의 역할은 아주 단순합니다. 그래픽 버퍼를 생성하는 컴포넌트(생산자)와 이 데이터를 받아서 디스플레이 하거나 프로세싱하는 컴포넌트(소비자)를 연결시켜 줍니다. 이러한 생산자/소비자 사이의 데이터를 이동시키는 작업을 BufferQueue를 통해서 처리 됩니다.
