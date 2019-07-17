@@ -166,4 +166,4 @@ Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data�
   4. 소비자는 획득한 버퍼의 데이터를 사용합니다.
   5. 사용이 완료 됐으면 소비자는 반환합니다. ==> releaseOutputBuffer<br>
   좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<br>
-  <a href=http://source.android.com/devices/graphics/architecture.html>Android Graphics Architecture</a>
+  <a href=http://source.android.com/devices/graphics/architecture.html target=_blank>Android Graphics Architecture</a>
