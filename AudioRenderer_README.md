@@ -87,6 +87,8 @@ if (timestampAdvancing)
 }
 ```
 
+![NexPlayer AudioRenderer getTimestamp](resources/gettimestamp_01.png)
+
 <hr/>
 
 ### 예외 처리
