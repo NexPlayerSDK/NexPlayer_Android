@@ -165,5 +165,5 @@ Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data�
   3. 프로세싱이 끝난 후, 소비자는 버퍼를 획득합니다. ==> acquireBuffer/dequeueOutputBuffer
   4. 소비자는 획득한 버퍼의 데이터를 사용합니다.
   5. 사용이 완료 됐으면 소비자는 반환합니다. ==> releaseOutputBuffer
-  좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<br>
+  좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<p>
   <a href=http://source.android.com/devices/graphics/architecture.html>Android Graphics Architecture</a>
