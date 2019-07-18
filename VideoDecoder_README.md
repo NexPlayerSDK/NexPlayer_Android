@@ -120,7 +120,7 @@ int outputIndex = decoder.dequeueOutputBuffer(OutputInfo, 5000);
 if ((info.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == MediaCodec.BUFFER_FLAG_CODEC_CONFIG)
     Log.d("MediaCodec", "configuration info flag!");
 
-  switch (outputIndex) {
+switch (outputIndex) {
     case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:
         break;
     case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:
@@ -153,7 +153,7 @@ if ((info.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == MediaCodec.BUFFER_FLAG
             decoder.releaseOutputBuffer(outputIndex, true);
         }
         break;
-    }
+}
 ```
 
 ### Android BufferQueue System
@@ -167,3 +167,17 @@ Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data�
   5. 사용이 완료 됐으면 소비자는 반환합니다. ==> releaseOutputBuffer<br>
   좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<br>
   Android Graphics Architecture : http://source.android.com/devices/graphics/architecture.html
+
+### Appendix
+MediaCodec 사용에 필요한 부분적인 사용법을 기술합니다.
+<hr />
+1. decoder name으로 MediaCodec 생성하기.
+```java
+decoder = createDecoderByName("OMX.qcom.video.decoder.avc");
+```
+decoder name으로 MediaCodec를 생성할 수 있습니다. 위의 코드는 일반적인 test 코드이고 NexPlayerSDK의 MediaCodec CalBody에선 mime type을 이용하여 Device에서 지원하는 decoder list를 구하고 여기에서 필요한 decoder를 searching해서 사용합니다.
+```java
+MediaCodecInfo[] mediaCodecInfo;
+MediaCodecList mediaCodecList = new MediaCodecList(MediaCodecList.ALL_CODECS);
+mediaCodecInfo = mediaCodecList.getCodecInfos();
+```
