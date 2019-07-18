@@ -43,11 +43,12 @@ for (int i = 0; i < extractor.getTrackCount(); i++) {
 }
 ```
 
-3. MediaFormat을 얻은 후, 생성될 codec의 mime type을 구했으면 MediaCodec을 생성합니다. decoder를 생성할 때는 mime type으로 생성하는 방식이 있고 decoder name으로 생성하는 방법<b>(createDecoderByName)</b>이 있습니다. NexPlayer의 Codec Adaptation Layer의 구현은 Name으로 생성하게 되어 있으며 Name으로 구하기 위해서는 mime type과 <b>MediaCodecInfo</b> class를 이용하여 decoder name을 searching 하여 구할 수 있습니다. 자세한 사항은 <b>Appendix section</b>에 추가되어 있습니다.
+3. MediaFormat을 얻은 후, 생성될 codec의 mime type을 구했으면 MediaCodec을 생성합니다. decoder를 생성할 때는 mime type으로 생성하는 방식이 있고 decoder name으로 생성하는 방법<b>(createDecoderByName)</b>이 있습니다. NexPlayer의 Codec Adaptation Layer의 구현은 Name으로 생성하게 되어 있으며 Name으로 구하기 위해서는 mime type과 <b>MediaCodecInfo, MediaCodecList</b> class를 이용하여 decoder name을 searching 하여 구할 수 있습니다.
 ```java
 private MediaCodec decoder;
 try {
     decoder = MediaCodec.createDecoderByType(mime);
+    //decoder = MediaCodec.createDecoderByName("OMX.qcom.video.decoder.avc");
 } catch (IOException e) {
     e.printStackTrace();
 }
@@ -169,13 +170,41 @@ switch (outputIndex) {
 ** Appendix
 MediaCodec 사용에 필요한 부분적인 사용법을 기술합니다.<br>
 
-1. decoder name으로 MediaCodec 생성하기.
+1. 단말지원 최대 해상도 구하기.
 ```java
-decoder = createDecoderByName("OMX.qcom.video.decoder.avc");
-```
-decoder name으로 MediaCodec를 생성할 수 있습니다. 위의 코드는 일반적인 test 코드이고 NexPlayerSDK의 MediaCodec CalBody에선 mime type을 이용하여 Device에서 지원하는 decoder list를 구하고 여기에서 필요한 decoder를 searching해서 사용합니다.
-```java
-MediaCodecInfo[] mediaCodecInfo;
-MediaCodecList mediaCodecList = new MediaCodecList(MediaCodecList.ALL_CODECS);
-mediaCodecInfo = mediaCodecList.getCodecInfos();
+private static MediaCodecInfo selectCodec(String mimeType) {
+    int numCodecs = MediaCodecList.getCodecCount();
+    for (int i = 0; i < numCodecs; i++) {
+        MediaCodecInfo codecInfo = MediaCodecList.getCodecInfoAt(i);
+        
+        if (codecInfo.isEncoder()) {
+            continue;
+        }
+        
+        String[] types = codecInfo.getSupportedTypes();
+        for (int j = 0; j < types.length; j++) {
+            if (types[j].equalsIgnoreCase(mimeType)) {
+                return codecInfo;
+            }
+        }
+    }
+    return null;
+}
+            .
+            .
+            .
+private String mimeType = "video/avc";
+private MediaCodecInfo codecInfo;
+
+codecInfo = selectCodec(mimeType);
+MediaCodecInfo.CodecCapabilities codecCap = codecInfo.getCapabilitiesForType(mimeType);
+MediaCodecInfo.VideoCapabilities videoCap = codecCap.getVideoCapabilities();
+
+Range<Integer> with_range = videoCap.getSupportedWidths();
+Range<Integer> height_range = videoCap.getSupportedHeights();
+
+int device_max_width = width_range.getUpper();
+int device_max_height= height_range.getUpper();
+
+Log.d("MediaCodec", "This device max support resolution : " + device_max_width + " x " + device_max_height);
 ```
