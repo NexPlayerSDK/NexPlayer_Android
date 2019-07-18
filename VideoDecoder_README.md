@@ -171,7 +171,7 @@ https://developer.android.com/reference/android/media/MediaCodec#using-an-output
 ### Appendix
 MediaCodec 사용에 필요한 부분적인 사용법을 기술합니다.<br>
 
-1. 단말지원 최대 해상도 구하기.
+<b>1. 단말지원 최대 해상도 구하기.</b>
 ```java
 private static MediaCodecInfo selectCodec(String mimeType) {
     int numCodecs = MediaCodecList.getCodecCount();
@@ -210,7 +210,7 @@ int device_max_height= height_range.getUpper();
 Log.d("MediaCodec", "This device max support resolution : " + device_max_width + " x " + device_max_height);
 ```
 
-2. 단말의 Video Codec의 지원 profile, level 구하기.<br>
+<b>2. 단말의 Video Codec의 지원 profile, level 구하기.</b><br>
 NexPlayerSDK는 재생할 컨텐츠의 profile/level를 구하여 재생할 장치의 h/w video decoder에서 지원할 수 있는 profile/level과 비교하여 재생 여/부를 판단하여 재생시도를 합니다. h/w video decoder의 지원범위를 넘는 컨텐츠를 재생할 경우 재생 중, crash 및 기타 예상할 수 없는 문제들이 발생할 수 있습니다.<br>
 아래 코드는 간단하게 profile/level을 출력하는 코드이며, 실제 사용하기 위해서는 OMX Profile/Level을 참조해서 변환해야 합니다.
 ```java
@@ -236,7 +236,7 @@ if (codecCapabilities != null) {
 Log.d("MediaCodec", "max profile : " + maxProfile + ", max level : " + maxLevel);
 ```
 
-3. Android BufferQueue System<br>
+<b>3. Android BufferQueue System</b><br>
 Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data를 핸들링합니다. 이것의 역할은 아주 단순합니다. 그래픽 버퍼를 생성하는 컴포넌트<b>(생산자)</b>와 이 데이터를 받아서 디스플레이 하거나 프로세싱하는 컴포넌트<b>(소비자)</b>를 연결시켜 줍니다. 이러한 생산자/소비자 사이의 데이터를 이동시키는 작업을 BufferQueue를 통해서 처리합니다.<br>
 위 MediaCodec의 Decoding/Renderering 코드를 보면 BufferQueue system에 의해서 dequeue/queue API를 이용하여 Frame 데이터 및 Rendering 데이터를 서로 유기적으로 사용하고 있는 것을 볼 수 있습니다.
 <br><br>
@@ -249,7 +249,7 @@ Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data�
     좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<br>
     Android Graphics Architecture : http://source.android.com/devices/graphics/architecture.html
 <br><br>
-4. 단말이 지원 가능한 max width/height 값을 설정.
+<b>4. 단말이 지원 가능한 max width/height 값을 설정.</b>
 ```java
 this is test code
 ```
