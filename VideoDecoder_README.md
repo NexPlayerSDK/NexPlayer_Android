@@ -209,3 +209,20 @@ int device_max_height= height_range.getUpper();
 
 Log.d("MediaCodec", "This device max support resolution : " + device_max_width + " x " + device_max_height);
 ```
+
+2. 단말의 Video Codec의 지원 profile, level 구하기.<br>
+NexPlayerSDK는 재생할 컨텐츠의 profile/level를 구하여 재생할 장치의 h/w video decoder에서 지원할 수 있는 profile/level과 비교하여 재생 여/부를 판단하여 재생시도를 합니다. h/w video decoder의 지원범위를 넘는 컨텐츠를 재생할 경우 재생 중, crash 및 기타 예상할 수 없는 문제들이 발생할 수 있습니다.
+```java
+MediaCodecInfo.CodecCapabilities codecCapabilities = selectMediaCodecInfo.getCapabilitiesForType(type);
+int maxProfile = 0;
+int maxLevel = 0;
+
+if (codecCapabilities != null) {
+    if (codecCapabilities.profileLevels != null) {
+        for (MediaCodecInfo.CodecProfileLevel profileLevel : codecCapabilities.profileLevels) {
+            if (profileLevel == null)
+                continue;
+            
+            if (profileLevel.profile > 64)  //64 is AVCProfileHigh444
+                continue;
+```
