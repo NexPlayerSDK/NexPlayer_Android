@@ -167,7 +167,7 @@ switch (outputIndex) {
 
 <hr />
 
-** Appendix
+### Appendix
 MediaCodec 사용에 필요한 부분적인 사용법을 기술합니다.<br>
 
 1. 단말지원 최대 해상도 구하기.
