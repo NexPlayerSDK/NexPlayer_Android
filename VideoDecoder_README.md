@@ -164,7 +164,8 @@ switch (outputIndex) {
         break;
 }
 ```
-
+위 코드에서 Display에 해당하는 releaseOutputBuffer() API의 nanoTime 처리에 대한 자세한 사항은 아래 문서를 참조 하시기 바랍니다.<BR>
+https://developer.android.com/reference/android/media/MediaCodec#using-an-output-surface
 <hr />
 
 ### Appendix
