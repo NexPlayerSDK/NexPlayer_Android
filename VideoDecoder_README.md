@@ -241,10 +241,15 @@ Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data�
 위 MediaCodec의 Decoding/Renderering 코드를 보면 BufferQueue system에 의해서 dequeue/queue API를 이용하여 Frame 데이터 및 Rendering 데이터를 서로 유기적으로 사용하고 있는 것을 볼 수 있습니다.
 <br><br>
 ** 사용법
-1) 생산자는 일련의 버퍼특징을 기술하여 비어있는 버퍼를 요청합니다 ==> dequeueInputBuffer
-2) 생산자는 버퍼를 채운다음 이를 다시 Queue에 반환합니다. ==> queueInputBuffer
-3) 프로세싱이 끝난 후, 소비자는 버퍼를 획득합니다. ==> acquireBuffer/dequeueOutputBuffer
-4) 소비자는 획득한 버퍼의 데이터를 사용합니다.
-5) 사용이 완료 됐으면 소비자는 반환합니다. ==> releaseOutputBuffer<br>
-좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<br>
-Android Graphics Architecture : http://source.android.com/devices/graphics/architecture.html
+    1) 생산자는 일련의 버퍼특징을 기술하여 비어있는 버퍼를 요청합니다 ==> dequeueInputBuffer
+    2) 생산자는 버퍼를 채운다음 이를 다시 Queue에 반환합니다. ==> queueInputBuffer
+    3) 프로세싱이 끝난 후, 소비자는 버퍼를 획득합니다. ==> acquireBuffer/dequeueOutputBuffer
+    4) 소비자는 획득한 버퍼의 데이터를 사용합니다.
+    5) 사용이 완료 됐으면 소비자는 반환합니다. ==> releaseOutputBuffer<br>
+    좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<br>
+    Android Graphics Architecture : http://source.android.com/devices/graphics/architecture.html
+<br><br>
+4. 단말이 지원 가능한 max width/height 값을 설정.
+```java
+this is test code
+```
