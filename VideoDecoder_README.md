@@ -211,9 +211,11 @@ Log.d("MediaCodec", "This device max support resolution : " + device_max_width +
 ```
 
 2. 단말의 Video Codec의 지원 profile, level 구하기.<br>
-NexPlayerSDK는 재생할 컨텐츠의 profile/level를 구하여 재생할 장치의 h/w video decoder에서 지원할 수 있는 profile/level과 비교하여 재생 여/부를 판단하여 재생시도를 합니다. h/w video decoder의 지원범위를 넘는 컨텐츠를 재생할 경우 재생 중, crash 및 기타 예상할 수 없는 문제들이 발생할 수 있습니다.
+NexPlayerSDK는 재생할 컨텐츠의 profile/level를 구하여 재생할 장치의 h/w video decoder에서 지원할 수 있는 profile/level과 비교하여 재생 여/부를 판단하여 재생시도를 합니다. h/w video decoder의 지원범위를 넘는 컨텐츠를 재생할 경우 재생 중, crash 및 기타 예상할 수 없는 문제들이 발생할 수 있습니다.<br>
+아래 코드는 간단하게 profile/level을 출력하는 코드이며, 실제 사용하기 위해서는 OMX Profile/Level을 참조해서 변환해야 합니다.
 ```java
-MediaCodecInfo.CodecCapabilities codecCapabilities = selectMediaCodecInfo.getCapabilitiesForType(type);
+private static final String mimeType = "video/avc";
+MediaCodecInfo.CodecCapabilities codecCapabilities = selectMediaCodecInfo.getCapabilitiesForType(mimeType);
 int maxProfile = 0;
 int maxLevel = 0;
 
@@ -231,17 +233,18 @@ if (codecCapabilities != null) {
         }
     }
 }
+Log.d("MediaCodec", "max profile : " + maxProfile + ", max level : " + maxLevel);
 ```
 
 3. Android BufferQueue System<br>
 Android Graphics System은 BufferQueue라는 핵심 클래스에 의해서 Data를 핸들링합니다. 이것의 역할은 아주 단순합니다. 그래픽 버퍼를 생성하는 컴포넌트<b>(생산자)</b>와 이 데이터를 받아서 디스플레이 하거나 프로세싱하는 컴포넌트<b>(소비자)</b>를 연결시켜 줍니다. 이러한 생산자/소비자 사이의 데이터를 이동시키는 작업을 BufferQueue를 통해서 처리합니다.<br>
-위 코드를 보면 BufferQueue system에 의해서 dequeue/queue API를 이용하여 Frame 데이터 및 Rendering 데이터를 서로 유기적으로 사용하고 있는 것을 볼 수 있습니다.
+위 MediaCodec의 Decoding/Renderering 코드를 보면 BufferQueue system에 의해서 dequeue/queue API를 이용하여 Frame 데이터 및 Rendering 데이터를 서로 유기적으로 사용하고 있는 것을 볼 수 있습니다.
 <br><br>
 ** 사용법
-    1) 생산자는 일련의 버퍼특징을 기술하여 비어있는 버퍼를 요청합니다 ==> dequeueInputBuffer
-    2) 생산자는 버퍼를 채운다음 이를 다시 Queue에 반환합니다. ==> queueInputBuffer
-    3) 프로세싱이 끝난 후, 소비자는 버퍼를 획득합니다. ==> acquireBuffer/dequeueOutputBuffer
-    4) 소비자는 획득한 버퍼의 데이터를 사용합니다.
-    5) 사용이 완료 됐으면 소비자는 반환합니다. ==> releaseOutputBuffer<br>
+1) 생산자는 일련의 버퍼특징을 기술하여 비어있는 버퍼를 요청합니다 ==> dequeueInputBuffer
+2) 생산자는 버퍼를 채운다음 이를 다시 Queue에 반환합니다. ==> queueInputBuffer
+3) 프로세싱이 끝난 후, 소비자는 버퍼를 획득합니다. ==> acquireBuffer/dequeueOutputBuffer
+4) 소비자는 획득한 버퍼의 데이터를 사용합니다.
+5) 사용이 완료 됐으면 소비자는 반환합니다. ==> releaseOutputBuffer<br>
 좀 더 자세한 사항은 아래 URL을 참고하기 바랍니다.<br>
 Android Graphics Architecture : http://source.android.com/devices/graphics/architecture.html
