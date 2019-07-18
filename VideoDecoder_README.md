@@ -171,7 +171,7 @@ https://developer.android.com/reference/android/media/MediaCodec#using-an-output
 ### Appendix
 MediaCodec 사용에 필요한 부분적인 사용법을 기술합니다.<br>
 
-<b>1. 단말지원 최대 해상도 구하기.</b>
+<b>1. 디바이스에서 지원할 수 있는 최대 해상도 구하기.</b>
 ```java
 private static MediaCodecInfo selectCodec(String mimeType) {
     int numCodecs = MediaCodecList.getCodecCount();
@@ -210,7 +210,7 @@ int device_max_height= height_range.getUpper();
 Log.d("MediaCodec", "This device max support resolution : " + device_max_width + " x " + device_max_height);
 ```
 
-<b>2. 단말의 Video Codec의 지원 profile, level 구하기.</b><br>
+<b>2. 디바이스의 Video Codec max profile, max level 구하기.</b><br>
 NexPlayerSDK는 재생할 컨텐츠의 profile/level를 구하여 재생할 장치의 h/w video decoder에서 지원할 수 있는 profile/level과 비교하여 재생 여/부를 판단하여 재생시도를 합니다. h/w video decoder의 지원범위를 넘는 컨텐츠를 재생할 경우 재생 중, crash 및 기타 예상할 수 없는 문제들이 발생할 수 있습니다.<br>
 아래 코드는 간단하게 profile/level을 출력하는 코드이며, 실제 사용하기 위해서는 OMX Profile/Level을 참조해서 변환해야 합니다.
 ```java
