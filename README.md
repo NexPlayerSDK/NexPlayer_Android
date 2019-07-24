@@ -289,3 +289,6 @@ After playback by NexPlayer™, NexALFactory.release should be called when insta
 mNexPlayer.release();
 mNexALFactory.release();
 ```
+
+### Widevine Configuration
+If you want to set Widevine DRM on NexPlayer, Here is [Widevine Integration Guide](https://github.com/NexPlayerSDK/NexPlayer_Android_Widevine) for Android with NexPlayer.
