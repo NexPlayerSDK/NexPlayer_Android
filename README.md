@@ -104,13 +104,13 @@ The code below is an example of creating a player instance and initialize the pl
 mNexPlayer = new NexPlayer();
 mNexALFactory = new NexALFactory();
 
-if( mNexALFactory.init(this, android.os.Build.MODEL, NexPlayer.NEX_DEVICE_USE_AUTO, debugLogLevel, 1 ) == false ) {
+if( mNexALFactory.init(this, android.os.Build.MODEL, NexPlayer.NEX_DEVICE_USE_AUTO, debugLogLevel, 1 ) == NexErrorCode.NONE ) {
     Log.e(LOG_TAG, "ALFactory initialization failed");
     return -2;
 }
 
 mNexPlayer.setNexALFactory(mNexALFactory);
-if( mNexPlayer.init(this, 0) == false ) {
+if( mNexPlayer.init(this, 0) == NexErrorCode.NONE ) {
     Log.e(LOG_TAG,"NexPlayer initialization failed");
     return -3;
 }
