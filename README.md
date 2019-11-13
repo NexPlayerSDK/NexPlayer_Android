@@ -97,24 +97,42 @@ Please refer for more information [Include prebuilt native libraries](https://de
 [Specify ABIs](https://developer.android.com/studio/projects/gradle-external-native-builds#specify-abi) of Android Reference documentation.
 
 
-### Creating the player
+### Creating the player
 
-The code below is an example of creating a player instance and initialize the player instance.
+The code below is an example of creating a player instance and initialize the player instance.
 ```java
-mNexPlayer = new NexPlayer();
-mNexALFactory = new NexALFactory();
+mNexPlayer = new NexPlayer();
+mNexALFactory = new NexALFactory();
 
-if( mNexALFactory.init(this, android.os.Build.MODEL, NexPlayer.NEX_DEVICE_USE_AUTO, debugLogLevel, 1 ) == NexErrorCode.NONE ) {
-    Log.e(LOG_TAG, "ALFactory initialization failed");
-    return -2;
+if( mNexALFactory.init(this, android.os.Build.MODEL, NexPlayer.NEX_DEVICE_USE_AUTO, debugLogLevel, 1 ) == NexErrorCode.NONE ) {
+    Log.e(LOG_TAG, "ALFactory initialization failed");
+    return -2;
 }
 
 mNexPlayer.setNexALFactory(mNexALFactory);
-if( mNexPlayer.init(this, 0) == NexErrorCode.NONE ) {
-    Log.e(LOG_TAG,"NexPlayer initialization failed");
-    return -3;
+if( mNexPlayer.init(this) == NexErrorCode.NONE ) {
+    Log.e(LOG_TAG,"NexPlayer initialization failed");
+    return -3;
 }
 ```
+#####NOTE: This guide is for NexPlayerSDK version 6.64.4.754 or higher.
+If you are using older version, please refer to the below
+```java
+mNexPlayer = new NexPlayer();
+mNexALFactory = new NexALFactory();
+
+if( mNexALFactory.init(this, android.os.Build.MODEL, NexPlayer.NEX_DEVICE_USE_AUTO, debugLogLevel, 1 ) == NexErrorCode.NONE ) {
+    Log.e(LOG_TAG, "ALFactory initialization failed");
+    return -2;
+}
+
+mNexPlayer.setNexALFactory(mNexALFactory);
+if( mNexPlayer.init(this, 0) == false ) {
+    Log.e(LOG_TAG,"NexPlayer initialization failed");
+    return -3;
+}
+```
+
 
 ### Attaching the player to view
 
