@@ -97,7 +97,7 @@ Please refer for more information [Include prebuilt native libraries](https://de
 [Specify ABIs](https://developer.android.com/studio/projects/gradle-external-native-builds#specify-abi) of Android Reference documentation.
 
 
-### Creating the player
+### Creating the player
 
 The code below is an example of creating a player instance and initialize the player instance.
 ```java
@@ -115,7 +115,7 @@ if( mNexPlayer.init(this) == NexErrorCode.NONE ) {
     return -3;
 }
 ```
-#####NOTE: This guide is for NexPlayerSDK version 6.64.4.754 or higher.
+##### NOTE: This guide is for NexPlayerSDK version 6.64.4.754 or higher.
 If you are using older version, please refer to the below
 ```java
 mNexPlayer = new NexPlayer();
